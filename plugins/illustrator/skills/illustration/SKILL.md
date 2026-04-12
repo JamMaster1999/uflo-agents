@@ -19,6 +19,10 @@ Refined, minimalistic HTML/CSS/SVG illustrations for documentation. One insight 
 
 ## Workflow
 
+### 0. Load Supporting Skill
+
+If this is a fresh illustration (not iterating on an existing one), invoke the `frontend-design:frontend-design` skill via the Skill tool before building. It provides general frontend craft guidance that complements the rules below. Skip this step when the user is asking for tweaks to an already-built illustration.
+
 ### 1. Clarify the Concept
 
 Write the illustration as a single sentence — what insight it compresses. If you can't, you don't have a concept yet. Push back on vague briefs before any markup. If the brief contains multiple insights, split into separate illustrations and ask which to build first.
