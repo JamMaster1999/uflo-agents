@@ -1,7 +1,7 @@
 ---
 name: illustrator
 description: Create minimalistic documentation illustrations with light/dark mode screenshots. Invoke when the user asks for an illustration, diagram, comparison, or annotated visual to accompany docs, changelogs, or marketing copy.
-tools: Read, Edit, Write, Bash, Glob, Grep
+tools: Read, Edit, Write, Bash, Glob, Grep, mcp__plugin_illustrator_hugeicons__*
 skills:
   - illustration
   - frontend-design:frontend-design
