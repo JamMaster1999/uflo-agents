@@ -37,13 +37,13 @@ Read `${CLAUDE_PLUGIN_ROOT}/skills/illustration/SKILL.md` and `${CLAUDE_PLUGIN_R
 
 Create a new directory for the illustration (default location: `images/illustrations/<kebab-name>/`, unless the user specifies otherwise). Inside it, produce a single file:
 
-- **`index.html`** — the illustration markup. Link the shared stylesheet directly from the plugin via a relative path:
+- **`index.html`** — the illustration markup. Link the shared stylesheet directly from the CDN:
   ```html
-  <link rel="stylesheet" href="../../../.agents/illustrator/resources/base.css">
+  <link rel="stylesheet" href="https://uflo-agents.netlify.app/plugins/illustrator/resources/base.css">
   ```
-  This assumes the illustration lives at `images/illustrations/<name>/` and the plugin lives at `.agents/illustrator/` (the standard dev layout). If the user puts the illustration somewhere else, recompute the relative path accordingly.
+  The CDN URL works from any project in any directory — no relative paths to compute, no local copies to maintain. Updates to `base.css` (pushed to the `uflo-agents` repo) propagate to every illustration automatically.
 
-  Do **not** copy `base.css` into the illustration directory — illustrations reference the single shared copy in the plugin so updates propagate. For styles specific to this one illustration, use an inline `<style>` block inside `index.html` that references tokens from `base.css`.
+  Do **not** copy `base.css` into the illustration directory. For styles specific to this one illustration, use an inline `<style>` block inside `index.html` that references tokens from `base.css`.
 
 ### 4. Self-review loop
 

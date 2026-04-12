@@ -58,16 +58,16 @@ These aren't required — they're in your toolkit.
 - **Glass lens.** When you need to call attention to a small detail (a point value, a page number, a QR code), the plugin ships a glass lens system that renders a magnifying-glass effect over a specific region. Add the CSS in `<head>` and the JS at the end of `<body>`:
   ```html
   <!-- head -->
-  <link rel="stylesheet" href="../../../.agents/illustrator/resources/glass-lens.css">
-  <link rel="stylesheet" href="../../../.agents/illustrator/resources/glass-toolbox.css">
+  <link rel="stylesheet" href="https://uflo-agents.netlify.app/plugins/illustrator/resources/glass-lens.css">
+  <link rel="stylesheet" href="https://uflo-agents.netlify.app/plugins/illustrator/resources/glass-toolbox.css">
 
   <!-- end of body -->
   <div class="glass-lens" style="top: 100px; left: 47px;"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-  <script src="../../../.agents/illustrator/resources/liquidGL.js" defer></script>
-  <script src="../../../.agents/illustrator/resources/glass-toolbox.js" defer></script>
-  <script src="../../../.agents/illustrator/resources/glass-lens.js" defer></script>
+  <script src="https://uflo-agents.netlify.app/plugins/illustrator/resources/liquidGL.js" defer></script>
+  <script src="https://uflo-agents.netlify.app/plugins/illustrator/resources/glass-toolbox.js" defer></script>
+  <script src="https://uflo-agents.netlify.app/plugins/illustrator/resources/glass-lens.js" defer></script>
   ```
   Position each `<div class="glass-lens">` with `top`/`left` inline styles to place the lens over the target element. Add `margin-top` to `.label` when lenses extend below the page to avoid overlap with the description text.
 
