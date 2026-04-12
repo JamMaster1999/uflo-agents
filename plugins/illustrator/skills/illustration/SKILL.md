@@ -7,6 +7,19 @@ This skill guides creation of refined, minimalistic illustrations for docs, rele
 
 The user provides the concept — what insight the illustration should compress into a visual — and may include context about the surrounding doc, the audience, or constraints.
 
+## Resources
+
+- **Shared stylesheet**: `${CLAUDE_PLUGIN_ROOT}/resources/base.css` — design tokens, shared components, dark-mode palette. The authoritative starting point for every illustration. Read this before writing markup.
+- **Glass lens system**: `${CLAUDE_PLUGIN_ROOT}/resources/glass-lens.*`, `glass-toolbox.*`, `liquidGL.js` — composable magnifying-glass effect. See Common Patterns below for imports.
+- **Screenshot script**: `${CLAUDE_PLUGIN_ROOT}/scripts/screenshot.js` — captures light + dark PNG/WebP of an HTML file.
+- **Runtime deps location**: `${CLAUDE_PLUGIN_DATA}/node_modules` — Playwright and sharp, installed by the plugin's SessionStart hook.
+
+Illustrations link the shared stylesheet from the CDN rather than copying it:
+```html
+<link rel="stylesheet" href="https://uflo-agents.netlify.app/plugins/illustrator/resources/base.css">
+```
+This works from any project directory. Updates to `base.css` pushed to the `uflo-agents` repo propagate to every illustration automatically.
+
 ## Design Thinking
 
 Before any markup, commit to the concept and the composition:
@@ -28,6 +41,8 @@ This is the meta-rule that governs every aesthetic decision below.
 - **Extend when you need to.** Illustrations vary wildly — a comparison needs nothing like a timeline needs nothing like a data flow. When the shared system can't give you what the concept needs, write scoped styles in the illustration's own `<style>` block. Local CSS custom properties are fine and encouraged for one-off values, because they still participate in dark mode.
 - **Promote when the extension generalizes.** If you find yourself writing the same scoped style across two illustrations, or you build something that's obviously broader than the illustration you're in, surface it in your response as a promotion candidate so the shared base can be updated in the plugin source. The shared file grows over time; that's the point.
 
+Keep the bar high. `base.css` should stay lean, holding only the highest-frequency tokens, components, and classes. A good test: if you can't name a concrete second illustration that will use this pattern, it doesn't belong in `base.css` yet — keep it scoped to `index.html`.
+
 ## Illustration Aesthetics Guidelines
 
 - **Never hardcode hex.** Every color must come from a token or a locally-declared CSS custom property. Inline hex breaks dark mode silently. This is the one non-negotiable rule.
@@ -43,6 +58,7 @@ This is the meta-rule that governs every aesthetic decision below.
 - **No hex in SVG attributes.** `fill="#22c55e"` and `stroke="#ef4444"` break dark mode because SVG attributes can't reference CSS custom properties. Use a CSS class (`.foo { fill: var(--ink); }`) or `currentColor` with `color:` set on a parent.
 - **Icons that sit next to text scale with it.** Set `width: 1em; height: 1em` in CSS and drop `width`/`height` attributes from the SVG. The icon now tracks font-size automatically. (Illustration-scale SVGs that aren't inline with text can size however the composition needs.)
 - **Inline style is a valid escape hatch.** For one-off elements, `style="fill: var(--x)"` works directly on an SVG node. Classes are cleaner when the same rule applies to many elements.
+- **HugeIcons styles.** The library supports `stroke-rounded` (default, line icons) and `solid-rounded` (filled). Icons from the library are built to inherit `currentColor` — set `color:` on a parent and the icon follows.
 
 ## Modern CSS Techniques Worth Knowing
 
@@ -70,6 +86,17 @@ These aren't required — they're in your toolkit.
   <script src="https://uflo-agents.netlify.app/plugins/illustrator/resources/glass-lens.js" defer></script>
   ```
   Position each `<div class="glass-lens">` with `top`/`left` inline styles to place the lens over the target element. Add `margin-top` to `.label` when lenses extend below the page to avoid overlap with the description text.
+
+## Self-review Criteria
+
+After screenshotting light and dark modes, read both images and check each point. Fix, re-screenshot, and review again until nothing can be improved.
+
+- **Requirements coverage.** Go back to the brief and check each point. Can you point to a visible element in the illustration for every one? If a requirement isn't clearly represented, it's missing.
+- **Clarity.** Does the illustration clearly communicate its intended goal? Could someone unfamiliar with the context grasp the message in a few seconds?
+- **Realism.** If the illustration depicts a real artifact (a document, a screen, a physical object), does the mockup match how that thing actually looks? Would someone who's seen the real thing recognize it?
+- **Visual weight.** Squint at the illustration. Does anything jump out as too heavy, too thin, too cramped, or too sparse?
+- **Dark mode correctness.** Do tokens render correctly in both themes? No silent hex leaks?
+- **Anti-patterns.** Any of the ones listed below present?
 
 ## Anti-patterns
 
