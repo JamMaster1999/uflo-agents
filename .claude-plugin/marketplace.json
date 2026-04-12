@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "illustrator",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "description": "Create minimalistic documentation illustrations with light/dark mode screenshots.",
       "source": "./plugins/illustrator"
     }
