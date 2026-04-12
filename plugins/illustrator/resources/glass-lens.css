@@ -1,0 +1,50 @@
+/* Wrapper for positioning lenses relative to content */
+.lens-scene {
+  position: relative;
+}
+
+.glass-lens {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  z-index: 99999 !important;
+  cursor: grab;
+  pointer-events: auto !important;
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.08),
+    inset 0 8px 16px rgba(255,255,255,0.5),
+    inset 0 2px 4px rgba(255,255,255,0.4),
+    inset 0 -8px 16px rgba(0,0,0,0.08),
+    inset 0 -2px 6px rgba(0,0,0,0.06),
+    0 0 0 1px rgba(0,0,0,0.04);
+}
+.glass-lens:active { cursor: grabbing; }
+.glass-lens canvas { position: relative; z-index: 99999 !important; pointer-events: none; }
+.glass-lens::after {
+  content: '';
+  position: absolute;
+  top: 18%;
+  left: 22%;
+  width: 12%;
+  height: 8%;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Dark mode — softer shadows and subtler specular */
+@media (prefers-color-scheme: dark) {
+  .glass-lens {
+    box-shadow:
+      0 4px 12px rgba(0,0,0,0.3),
+      inset 0 8px 16px rgba(255,255,255,0.15),
+      inset 0 2px 4px rgba(255,255,255,0.1),
+      inset 0 -8px 16px rgba(0,0,0,0.2),
+      inset 0 -2px 6px rgba(0,0,0,0.15),
+      0 0 0 1px rgba(255,255,255,0.05);
+  }
+  .glass-lens::after {
+    display: none;
+  }
+}

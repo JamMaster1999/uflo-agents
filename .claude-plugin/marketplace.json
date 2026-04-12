@@ -1,0 +1,15 @@
+{
+  "name": "uflo",
+  "owner": {
+    "name": "Sina Azizi"
+  },
+  "description": "Uflo internal plugins",
+  "plugins": [
+    {
+      "name": "illustrator",
+      "version": "0.1.0",
+      "description": "Create minimalistic documentation illustrations with light/dark mode screenshots.",
+      "source": "./plugins/illustrator"
+    }
+  ]
+}

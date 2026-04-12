@@ -1,0 +1,9 @@
+{
+  "name": "illustrator-plugin-runtime",
+  "private": true,
+  "description": "Runtime dependencies for the illustrator plugin's screenshot.js — installed by the SessionStart hook into CLAUDE_PLUGIN_DATA.",
+  "dependencies": {
+    "playwright": "^1.59.1",
+    "sharp": "^0.34.5"
+  }
+}

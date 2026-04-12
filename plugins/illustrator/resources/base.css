@@ -1,0 +1,181 @@
+/* =================================================================
+   Uflo Illustration Base
+   Shared tokens + components for all illustrations.
+   Import in each illustration's <head> via relative path:
+     <link rel="stylesheet" href="../../../.agents/illustrator/resources/base.css">
+   ================================================================= */
+
+/* Inter Variable font (wght 100–900). Loaded from Google Fonts CDN so the
+   stylesheet is self-contained — no local npm package required. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+/* ---------- Design tokens ----------
+   Light mode is the default. Dark mode overrides follow below and
+   kick in automatically via prefers-color-scheme, or can be forced
+   by setting [data-theme="dark"] on <html>. */
+:root {
+  /* Typography */
+  --font-sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, sans-serif;
+  --text-title:    46px;  /* main heading under an illustration */
+  --text-subtitle: 40px;  /* descriptive paragraph under the title */
+  --text-badge:    36px;  /* pill / badge label */
+
+  /* Neutral palette — light (true grays, no blue tint) */
+  --bg:            #fafafa;  /* page background (Mintlify light) */
+  --text:          #171717;  /* primary text */
+  --text-subtle:   #525252;  /* secondary text */
+  --text-muted:    #656565;  /* tertiary / captions */
+  --line:          #d4d4d4;  /* divider / strong line */
+  --line-soft:     #e5e5e5;  /* hairline / subtle line */
+  --surface:       #ffffff;  /* card / paper */
+  --surface-tint:  #f5f5f5;  /* neutral tinted fill */
+  --ink:           #262626;  /* dark accent (icons, QR) */
+
+  /* Success / "correct" palette — light */
+  --success:          #22c55e;  /* primary */
+  --success-text:     #15803d;  /* on-surface text */
+  --success-mid:      #86efac;  /* connectors, mid-tint */
+  --success-border:   #bbf7d0;  /* badge border, dashed outline */
+  --success-bg:       #ecfdf5;  /* badge fill */
+  --success-bg-soft:  #f0fdf4;  /* softest fill (backgrounds) */
+
+  /* Danger / "wrong" palette — light */
+  --danger:           #ef4444;  /* primary */
+  --danger-text:      #b91c1c;  /* on-surface text */
+  --danger-mid:       #fca5a5;  /* connectors, mid-tint */
+  --danger-border:    #fecaca;  /* badge border */
+  --danger-bg:        #fef2f2;  /* badge fill */
+  --danger-bg-soft:   #fefafa;  /* softest fill (backgrounds) */
+
+  /* Shadows */
+  --shadow-card:  0 3px 16px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-float: 0 6px 28px rgba(0,0,0,0.13);
+
+  /* Radii */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-pill: 28px;
+}
+
+/* ---------- Dark mode overrides ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* Neutral palette — dark (true grays) */
+    --bg:            #1e1c1c;  /* page background (Mintlify dark) */
+    --text:          #f5f5f5;
+    --text-subtle:   #d4d4d4;
+    --text-muted:    #bbb;
+    --line:          #525252;
+    --line-soft:     #404040;
+    --surface:       #262626;
+    --surface-tint:  #1a1a1a;
+    --ink:           #e5e5e5;
+
+    /* Success palette — dark */
+    --success:          #4ade80;
+    --success-text:     #86efac;
+    --success-mid:      #16a34a;
+    --success-border:   #166534;
+    --success-bg:       #14532d;
+    --success-bg-soft:  #0a1f12;
+
+    /* Danger palette — dark */
+    --danger:           #f87171;
+    --danger-text:      #fca5a5;
+    --danger-mid:       #dc2626;
+    --danger-border:    #991b1b;
+    --danger-bg:        #7f1d1d;
+    --danger-bg-soft:   #1f0a0a;
+
+    /* Shadows — stronger in dark mode so cards still separate from bg */
+    --shadow-card:  0 3px 16px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-float: 0 6px 28px rgba(0,0,0,0.6);
+  }
+}
+
+/* Explicit override: force dark mode regardless of system setting.
+   Usage: <html data-theme="dark"> */
+:root[data-theme="dark"] {
+  --bg:            #1e1c1c;
+  --text:          #f5f5f5;
+  --text-subtle:   #d4d4d4;
+  --text-muted:    #a3a3a3;
+  --line:          #525252;
+  --line-soft:     #404040;
+  --surface:       #262626;
+  --surface-tint:  #1a1a1a;
+  --ink:           #e5e5e5;
+
+  --success:          #4ade80;
+  --success-text:     #86efac;
+  --success-mid:      #16a34a;
+  --success-border:   #166534;
+  --success-bg:       #14532d;
+  --success-bg-soft:  #0a1f12;
+
+  --danger:           #f87171;
+  --danger-text:      #fca5a5;
+  --danger-mid:       #dc2626;
+  --danger-border:    #991b1b;
+  --danger-bg:        #7f1d1d;
+  --danger-bg-soft:   #1f0a0a;
+
+  --shadow-card:  0 3px 16px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-float: 0 6px 28px rgba(0,0,0,0.6);
+}
+
+/* ---------- Base reset + body ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh; padding: 60px 24px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- Shared components ----------
+   Optional — use when they fit. Otherwise write illustration-
+   specific classes that reference the tokens above. */
+
+/* Badge — pill label with optional leading icon/SVG.
+   Variants: .badge.success, .badge.danger */
+.badge {
+  display: inline-flex; align-items: center; gap: 16px;
+  font-size: var(--text-badge); font-weight: 600;
+  padding: 16px 36px; border-radius: var(--radius-pill);
+}
+/* Icon scales with the badge font-size (1em) and inherits the badge's
+   text color via currentColor — use stroke="currentColor" /
+   fill="currentColor" on the icon's child elements. */
+.badge svg { width: 1em; height: 1em; flex-shrink: 0; }
+.badge.success { background: var(--success-bg); color: var(--success-text); border: 1px solid var(--success-border); }
+.badge.danger  { background: var(--danger-bg);  color: var(--danger-text);  border: 1px solid var(--danger-border); }
+
+/* Label — title + description block placed under an illustration.
+   Variants: .label.success, .label.danger (colors the <h3>) */
+.label { text-align: center; margin-top: 20px; }
+.label h3 { font-size: var(--text-title); font-weight: 700; margin-bottom: 22px; letter-spacing: -0.01em; }
+.label p  { font-size: var(--text-subtitle); color: var(--text-muted); line-height: 1.75; max-width: 560px; font-weight: 450; }
+.label.success h3 { color: var(--success); }
+.label.danger  h3 { color: var(--danger); }
+
+/* Divider — vertical line with a centered label (e.g. "VS").
+   Place between two panels in a comparison layout. */
+.divider {
+  width: 1px; flex-shrink: 0; align-self: stretch; position: relative;
+  background: linear-gradient(to bottom, transparent, var(--line) 15%, var(--line) 85%, transparent);
+}
+.divider-label {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  background: var(--bg); padding: 12px 6px;
+  font-size: 18px; color: var(--text-muted); font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* Side-by-side comparison layout — two panels with a divider between. */
+.container { display: flex; gap: 64px; align-items: flex-start; max-width: 1280px; }
+.panel     { display: flex; flex-direction: column; align-items: center; gap: 36px; flex: 1; }
