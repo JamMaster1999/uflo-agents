@@ -45,7 +45,7 @@ Hand-draw instead when: the shape is trivial (checkmark, arrow, X), the visual i
 ### 4. Screenshot Both Themes
 
 ```bash
-CLAUDE_PLUGIN_DATA="${CLAUDE_PLUGIN_DATA}" node "${CLAUDE_PLUGIN_ROOT}/scripts/screenshot.js" <path-to-folder> --scale 6 --padding 64 --theme both --transparent --format webp
+CLAUDE_PLUGIN_DATA="${CLAUDE_PLUGIN_DATA}" node "${CLAUDE_PLUGIN_ROOT}/scripts/screenshot.js" <path-to-folder> --scale 6 --padding 0 --theme both --transparent --format webp
 ```
 
 This writes `light.webp` and `dark.webp` next to `index.html`.
